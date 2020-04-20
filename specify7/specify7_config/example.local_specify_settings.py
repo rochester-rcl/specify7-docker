@@ -12,8 +12,8 @@ DATABASE_PORT = '3306'
 
 # The master user login. Use the same values as
 # you did setting up the thick client.
-MASTER_NAME = 'admin'
-MASTER_PASSWORD = 'admin'
+MASTER_NAME = 'master'
+MASTER_PASSWORD = 'master'
 
 # Select the schema localization language.
 SCHEMA_LANGUAGE = 'en'
