@@ -4,7 +4,7 @@ services:
   specify7:
     build: ./specify7
     ports:
-      - "65001:80"
+      - "80:80"
     volumes:
       - ./specify7/specify6_thick_client:/usr/local/specify6
       - ./specify7/specify7_config:/usr/local/specify_config

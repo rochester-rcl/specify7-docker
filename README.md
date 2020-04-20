@@ -34,9 +34,7 @@ subfolder.
     cd specify7-docker
     docker-compose up -d
   ```
-  Your Specify 7 instance should now be available at `http://localhost:<port>`. 
-  I use port number 65001, because I have another webserver instance running on 
-  port 80, but you can change the port in the `docker-compose.yml` file.
+  Your Specify 7 instance should now be available at `http://localhost:<port>`.
 
 - To stop the container:
   ```
