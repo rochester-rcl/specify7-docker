@@ -13,17 +13,11 @@ RUN apt-get install -y libssl-dev libsasl2-dev libldap2-dev
 # NPM needs to be installed independently from and after libssl-dev, otherwise
 # apt-get will get confused about the dependencies and fail, or remove/disable 
 # NPM
-RUN apt-get install -y nodejs npm
+RUN apt-get install -y nodejs npm git
 
 # Get Specify 7
-ARG SPECIFY7_VERSION=7.3.1
-ENV SPECIFY7_VERSION ${SPECIFY7_VERSION}
-
 RUN cd /usr/local/ \
-	&& curl -L -o specify7.tar.gz https://github.com/specify/specify7/archive/v$SPECIFY7_VERSION.tar.gz \
-	&& tar -xvf specify7.tar.gz \
-	&& mv specify7-$SPECIFY7_VERSION specify7 \
-	&& rm -rf specify7.tar.gz
+	&& git clone https://github.com/specify/specify7/
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
