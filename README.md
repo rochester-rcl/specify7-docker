@@ -14,7 +14,7 @@ Specify 7 is build upon Specify 6, so you need a running instance of Specify 6.
   ```
 
 - Copy your Specify 6 client into the `specify7/specify6_thick_client` directory.
-Make sure your dircetory structure looks like in the image below and that there
+Make sure your directory structure looks like in the image below and that there
 is no `specify6` (or something like that) subfolder between the
 `specify6_thick_client` folder and the `specify.jar` file and the `config`
 subfolder.
