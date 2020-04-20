@@ -2,7 +2,7 @@
 
 Dockerized version of [Specify 7](https://github.com/specify/specify7). The included
 [Docker image](https://github.com/rbgvictoria/specify7-docker/blob/master/specify7/Dockerfile)
-is for version 7.3.1 of the software.
+is for version 7.4.0 of the software.
 
 Specify 7 is build upon Specify 6, so you need a running instance of Specify 6.
 
