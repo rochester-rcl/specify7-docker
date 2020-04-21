@@ -4,7 +4,7 @@ LABEL maintainer="Niels Klazenga <github.com/nielsklazenga>"
 
 # Get Ubuntu packages
 RUN apt-get update && apt-get -y install \
-	git python-pip python-dev libmysqlclient-dev \
+	git python-pip python-dev default-libmysqlclient-dev \
 	apache2 libapache2-mod-python libapache2-mod-wsgi \
 	build-essential curl python-lxml git
 
