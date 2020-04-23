@@ -8,7 +8,7 @@ RUN apt-get update && apt-get -y install \
 	apache2 libapache2-mod-python libapache2-mod-wsgi \
 	libssl-dev libsasl2-dev libldap2-dev \
 	build-essential curl git aptitude
-RUN aptitude install -y nodejs npm libmysqlclient-dev
+RUN aptitude install -y nodejs npm libmariadbclient-dev
 
 # Get Specify 7
 RUN cd /usr/local/ \
