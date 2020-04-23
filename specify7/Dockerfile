@@ -1,6 +1,7 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="Niels Klazenga <github.com/nielsklazenga>"
+LABEL maintainer="Specify Collections Consortium
+ <github.com/specify>"
 
 # Get Ubuntu packages
 RUN apt-get update && apt-get -y install \
