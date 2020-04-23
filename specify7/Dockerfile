@@ -6,14 +6,9 @@ LABEL maintainer="Niels Klazenga <github.com/nielsklazenga>"
 RUN apt-get update && apt-get -y install \
 	git python-pip python-dev default-libmysqlclient-dev \
 	apache2 libapache2-mod-python libapache2-mod-wsgi \
-	build-essential curl python-lxml git
-
-RUN apt-get install -y libssl-dev libsasl2-dev libldap2-dev
-
-# NPM needs to be installed independently from and after libssl-dev, otherwise
-# apt-get will get confused about the dependencies and fail, or remove/disable
-# NPM
-RUN apt-get install -y nodejs npm
+	libssl-dev libsasl2-dev libldap2-dev \
+	build-essential curl git aptitude
+RUN aptitude install -y nodejs npm libmysqlclient-dev
 
 # Get Specify 7
 RUN cd /usr/local/ \
