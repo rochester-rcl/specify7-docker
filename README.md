@@ -1,7 +1,7 @@
 # Specify 7 in Docker
 
 Dockerized version of [Specify 7](https://github.com/specify/specify7). The included
-[Docker image](https://github.com/rbgvictoria/specify7-docker/blob/master/specify7/Dockerfile)
+[Docker image](https://github.com/specify/specify7-docker/blob/master/specify7/Dockerfile)
 is for version 7.4.0 of the software.
 
 Specify 7 is build upon Specify 6, so you need a running instance of Specify 6.
@@ -10,7 +10,7 @@ Specify 7 is build upon Specify 6, so you need a running instance of Specify 6.
 
 - Clone this repository.
   ```
-    git clone https://github.com/rbgvictoria/specify7-docker.git
+    git clone https://github.com/specify/specify7-docker.git
   ```
 
 - Copy your Specify 6 client into the `specify7/specify6_thick_client` directory.
