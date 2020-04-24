@@ -6,14 +6,14 @@ THICK_CLIENT_LOCATION = '/usr/local/specify6/'
 # want to access.
 DATABASE_NAME = 'specify'
 
-# database hostname or IP
+# Database hostname or IP
 DATABASE_HOST = 'host.docker.internal'
 DATABASE_PORT = '3306'
 
 # The master user login. Use the same values as
 # you did setting up the thick client.
-MASTER_NAME = 'master'
-MASTER_PASSWORD = 'master'
+MASTER_NAME = 'root'
+MASTER_PASSWORD = 'root'
 
 # Select the schema localization language.
 SCHEMA_LANGUAGE = 'en'
