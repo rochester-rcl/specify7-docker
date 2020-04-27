@@ -13,17 +13,6 @@ Specify 7 is build upon Specify 6, so you need a running instance of Specify 6.
     git clone https://github.com/specify/specify7-docker.git
   ```
 
-- Copy your Specify 6 client into the `specify7/specify6_thick_client` directory.
-Make sure your directory structure looks like in the image below and that there
-is no `specify6` (or something like that) subfolder between the
-`specify6_thick_client` folder and the `specify.jar` file and the `config`
-subfolder.
-
-  ![](./screenshot-specify6-thick-client-directory-structure.png).
-
-- Rename `example.local_specify_settings.py` in `specify7/specify7_config` to
-  `local_specify_settings.py`
-
 - Add your database connection details in `local_specify_settings.py`. If you
   want to connect to a local instance of MySQL, use `host.docker.internal` (that
   works for me on Windows; if it doesn't work on your system, check your
@@ -49,5 +38,10 @@ subfolder.
     docker-compose up -d --build
   ```
 
+## Installing with containerized MariaDB
+Please follow official instructions for [setting up a MariaDB Docker container](https://mariadb.com/kb/en/installing-and-using-mariadb-via-docker/)
 
-
+After that, run you mariadb container like this (replace `root` with your desired password and `mariadb` with the name of your container):
+```bash
+docker container run --network bridge -e MYSQL_ROOT_PASSWORD=root mariadb
+`
