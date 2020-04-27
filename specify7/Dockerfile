@@ -6,9 +6,19 @@ LABEL maintainer="Specify Collections Consortium <github.com/specify>"
 RUN apt-get update && apt-get -y install \
 	python-pip python-dev default-libmysqlclient-dev \
 	apache2 libapache2-mod-python libapache2-mod-wsgi \
-	libssl-dev libsasl2-dev libldap2-dev \
-	build-essential curl git aptitude
+	libssl-dev libsasl2-dev libldap2-dev unzip curl \
+	build-essential curl git aptitude python-lxml \
+	mariadb-server
 RUN aptitude install -y nodejs npm libmariadbclient-dev
+
+# Get Amazon Corretto 8
+RUN wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
+RUN add-apt-repository 'deb https://apt.corretto.aws stable main'
+RUN apt-get install -y java-1.8.0-amazon-corretto-jdk
+
+# Get Web Portal
+RUN cd /usr/local/ \
+	&& git clone https://github.com/specify/webportal-installer/
 
 # Get Specify 7
 RUN cd /usr/local/ \
@@ -16,6 +26,7 @@ RUN cd /usr/local/ \
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 ### INSTALL AND CONFIGURE SPECIFY 7 ###
 
@@ -102,3 +113,19 @@ EXPOSE 80
 EXPOSE 443
 
 CMD ["/usr/local/bin/apache2-foreground", "-D", "FOREGROUND"]
+
+
+### CONFIGURE MARIADB ###
+
+# set root password
+# delete anonymous users
+# delete default database
+RUN myql --user=root << UPDATE mysql.user SET Password=PASSWORD('root') WHERE User='root'; \
+	DELETE FROM mysql.user WHERE User=''; \
+	DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); \
+	DROP DATABASE IF EXISTS test; \
+	DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'; \
+	FLUSH PRIVILEGES; \
+
+
+### INSTALL AND CONFIGURE WEB PORTAL ###
