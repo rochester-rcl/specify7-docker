@@ -4,7 +4,7 @@ LABEL maintainer="Specify Collections Consortium <github.com/specify>"
 
 # Get Ubuntu packages
 RUN apt-get update && apt-get -y install \
-	git python-pip python-dev default-libmysqlclient-dev \
+	python-pip python-dev default-libmysqlclient-dev \
 	apache2 libapache2-mod-python libapache2-mod-wsgi \
 	libssl-dev libsasl2-dev libldap2-dev \
 	build-essential curl git aptitude
