@@ -11,6 +11,10 @@ Supports Specif 7.4.0 and WebPortal 2.0
     git clone https://github.com/specify/specify7-docker.git
   ```
 
+- If you want to use your own database for specify7, remove the default database from `specify7/put_your_specify_database_here` and put an `.sql` export of your database there
+
+- If you want to use your own data fro WebPortal, remove the defailt `.zip` export from `specify7/put_your_webportal_export_file_here` and put your `.zip` export in there. YOu can use the Specify Data Export tool to create a Web Portal export zip file (see the Specify 6 Data Export documentation)
+
 - Build the Docker image and start the container
   ```
     cd specify7-docker

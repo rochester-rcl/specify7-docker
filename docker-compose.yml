@@ -5,8 +5,10 @@ services:
     build: ./specify7
     ports:
       - "80:80"
+      - "8983:8983"
     volumes:
-      - ./specify7/specify6_thick_client:/usr/local/specify6
+      - ./specify7/specify6_thick_client:/usr/local/wp_export
+      - ./specify7/put_your_webportal_export_file_here:/usr/local/specify6
       - ./specify7/specify7_config:/usr/local/specify_config
       - ~/.specify7-docker/data/specify7/specify_wb_upload:/usr/local/specify_wb_upload
       - ~/.specify7-docker/data/specify7/specify_depository:/var/www/html/specify/specify_depository
