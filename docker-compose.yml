@@ -18,12 +18,7 @@ services:
     restart: always
     ports:
       - "80:80"
-      - "8983:8983"
-    expose:
-      - "3306"
     depends_on:
-      - mariadb
-    links:
       - mariadb
     networks:
       - frontend
