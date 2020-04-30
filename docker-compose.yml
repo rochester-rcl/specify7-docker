@@ -1,14 +1,42 @@
 version: "3"
 
 services:
+
+  mariadb:
+    build: ./mariadb
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3305:3306"
+    restart: on-failure
+    command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "-uroot"]
+
   specify7:
     build: ./specify7
+    restart: always
     ports:
       - "80:80"
       - "8983:8983"
+    expose:
+      - "3306"
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    networks:
+      - frontend
+      - backend
     volumes:
       - ./specify7/specify6_thick_client:/usr/local/wp_export
       - ./specify7/put_your_webportal_export_file_here:/usr/local/specify6
       - ./specify7/specify7_config:/usr/local/specify_config
       - ~/.specify7-docker/data/specify7/specify_wb_upload:/usr/local/specify_wb_upload
       - ~/.specify7-docker/data/specify7/specify_depository:/var/www/html/specify/specify_depository
+
+networks:
+  frontend:
+    driver: bridge         
+  backend:
+    driver: bridge

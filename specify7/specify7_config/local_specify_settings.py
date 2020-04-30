@@ -7,9 +7,8 @@ THICK_CLIENT_LOCATION = '/usr/local/specify6/'
 DATABASE_NAME = 'specify'
 #make them have default database
 
-# database hostname or IP
-#DATABASE_HOST = '127.17.0.2'
-DATABASE_HOST = 'host.docker.internal'
+# Database hostname or IP
+DATABASE_HOST = 'mariadb'\
 DATABASE_PORT = '3306'
 
 # The master user login. Use the same values as
