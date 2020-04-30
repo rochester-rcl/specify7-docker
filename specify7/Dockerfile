@@ -71,7 +71,7 @@ RUN /usr/sbin/a2dismod python
 RUN /usr/sbin/a2enmod wsgi
 RUN /usr/sbin/a2enmod cgid
 
-RUN  chmod +x /usr/local/bin/apache2-foreground
+RUN chmod +x /usr/local/bin/apache2-foreground
 
 # avoid apache2 daemon start during boot
 RUN update-rc.d -f apache2 remove
