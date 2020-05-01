@@ -1,11 +1,28 @@
 FROM ubuntu:18.04
 
-RUN apt-get update && apt-get -y install mariadb-server
+LABEL maintainer="Specify Collections Consortium <github.com/specify>"
+
+# Get Ubuntu packages
+RUN apt-get update && apt-get -y install \
+	python-pip python-dev default-libmysqlclient-dev \
+	apache2 libapache2-mod-python libapache2-mod-wsgi \
+	libssl-dev libsasl2-dev libldap2-dev unzip curl \
+	build-essential curl git aptitude python-lxml \
+	mariadb-server
+RUN aptitude install -y nodejs npm libmariadbclient-dev
+
+# Get Specify 7
+RUN cd /usr/local/ \
+	&& git clone https://github.com/specify/specify7/
+
+# Clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
+### INSTALL AND CONFIGURE SPECIFY 7 ###
 
 # copy the config directory for initial build, but it will be overwritten by the (optionally) mounted volume
 COPY specify7_config /usr/local/specify_config
-
-# RUN ls -l /usr/local/specify_config
 
 # link specify7 config file from the mounted config volume
 RUN ln -sf /usr/local/specify_config/local_specify_settings.py /usr/local/specify7/specifyweb/settings/
@@ -16,7 +33,7 @@ RUN useradd specify \
 	&& chown -R specify.specify /home/specify \
 	&& mkdir /usr/local/specify_wb_upload \
 	&& chown -R specify:specify /usr/local/ \
-  && mkdir /var/www/html/specify \
+	&& mkdir /var/www/html/specify \
 	&& mkdir /var/www/html/specify/specify_depository \
 	&& chown -R specify:www-data /var/www/html/specify
 

@@ -5,7 +5,7 @@ services:
   mariadb:
     build: ./mariadb
     networks:
-      - backend
+      - sp7
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
@@ -21,17 +21,19 @@ services:
     depends_on:
       - mariadb
     networks:
-      - frontend
-      - backend
+      - sp7
     volumes:
-      - ./specify7/specify6_thick_client:/usr/local/wp_export
-      - ./specify7/put_your_webportal_export_file_here:/usr/local/specify6
+      - ./specify7/specify6_thick_client:/usr/local/specify6
       - ./specify7/specify7_config:/usr/local/specify_config
-      - ~/.specify7-docker/data/specify7/specify_wb_upload:/usr/local/specify_wb_upload
-      - ~/.specify7-docker/data/specify7/specify_depository:/var/www/html/specify/specify_depository
+
+  webportal:
+    build: ./webportal
+    restart: always
+    ports:
+     - '81:80'
+     - '8983:8983'
+    tty: true
 
 networks:
-  frontend:
-    driver: bridge         
-  backend:
+  sp7:
     driver: bridge
