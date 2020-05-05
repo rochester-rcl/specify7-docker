@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y install \
 	python-pip python-dev default-libmysqlclient-dev \
 	apache2 libapache2-mod-python libapache2-mod-wsgi \
 	libssl-dev libsasl2-dev libldap2-dev unzip curl \
-	build-essential curl git aptitude python-lxml
+	build-essential curl git aptitude python-lxml dos2unix
 RUN aptitude install -y nodejs npm libmariadbclient-dev
 
 # Get Specify 7
@@ -25,6 +25,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # copy the config directory for initial build, but it will be overwritten by the (optionally) mounted volume
 COPY specify7_config /usr/local/specify_config
+
+# change line endings for local_specify_settings.py
+RUN dos2unix /usr/local/specify_config/local_specify_settings.py
 
 # link specify7 config file from the mounted config volume
 RUN ln -sf /usr/local/specify_config/local_specify_settings.py /usr/local/specify7/specifyweb/settings/
