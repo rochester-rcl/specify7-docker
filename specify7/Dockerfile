@@ -7,8 +7,7 @@ RUN apt-get update && apt-get -y install \
 	python-pip python-dev default-libmysqlclient-dev \
 	apache2 libapache2-mod-python libapache2-mod-wsgi \
 	libssl-dev libsasl2-dev libldap2-dev unzip curl \
-	build-essential curl git aptitude python-lxml \
-	mariadb-server
+	build-essential curl git aptitude python-lxml
 RUN aptitude install -y nodejs npm libmariadbclient-dev
 
 # Get Specify 7
