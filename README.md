@@ -92,3 +92,11 @@ Then:
 ```
   docker-compose up -d --build
 ```
+
+## TODO
+
+- **[PRIORITY]** Deal with line endings error on Winodws machines
+
+- Right now, Specify7 container has Apache web server. Also, Web Portal contaienr uses nginx. Idealy, there should be a separate container for Nginx and Specify 7 with Web Portal should connect to it
+
+- We can uninstall most packages from Specify7 and Web Portal after the build process is over
