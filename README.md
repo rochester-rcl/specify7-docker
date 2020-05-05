@@ -18,7 +18,7 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
 
 - If you want to use your own data for WebPortal, replace `webportal/export.zip` with your own export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
 
-- **[For Windows hosts only]** Go to Docker settings and enable access to the C drive. Then go ahead and restore Docker
+- **[For Windows hosts only]** Go to Docker settings and enable access to the C drive. Then go ahead and restart Docker
 ![](./docker_settings.png)
 
 - Build the Docker image and start the container. Building process can take about than 15 minutes
