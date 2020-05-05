@@ -6,21 +6,31 @@ Supports Specif 7.4.0 and WebPortal 2.0
 
 ## Installation
 
+- Install Docker Desktop ([macOS](https://hub.docker.com/editions/community/docker-ce-desktop-mac/), [Linux](https://docs.docker.com/engine/install/ubuntu/), [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)) and make sure it is running
+
 - Clone this repository.
   ```
     git clone https://github.com/specify/specify7-docker.git
   ```
 
-- If you want to use your own database for specify7, remove the default database from `specify7/put_your_specify_database_here` and put an `.sql` export of your database there
+- If you want to use your own database for specify7, replace `mariadb/database.sql` with an export of your database. Be sure to name it `database.sql`
 
-- If you want to use your own data fro WebPortal, remove the defailt `.zip` export from `specify7/put_your_webportal_export_file_here` and put your `.zip` export in there. YOu can use the Specify Data Export tool to create a Web Portal export zip file (see the Specify 6 Data Export documentation)
+- If you want to use your own data for WebPortal, replace `webportal/export.zip` with your own export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
 
 - Build the Docker image and start the container
   ```
     cd specify7-docker
     docker-compose up -d
   ```
-  Your Specify 7 and Web Portal instance should now be available at `http://localhost:<port>`.
+
+  Specify 7 instance should now be available at `http://localhost:8080`.
+  WebPortal instance should now be available at `http://localhost:80`.
+  Solr admin panel should now be available at `http://localhost:8983`. You can restrict access to Solr from outside the container by commenting out the `8983:8983` line in `docker-compose.yml`
+
+  You can build containers without Specify7. In such case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part
+  You can build containers without webportal. In such case, you can comment out the `webportal`section in `docker-compose.yml`
+
+  If you want to run Specify7 with a local SQL server, follow [these instructions](https://github.com/specify/specify7-docker/tree/sp7_only)
 
 - To stop the container:
   ```
@@ -34,3 +44,28 @@ Supports Specif 7.4.0 and WebPortal 2.0
   ```
     docker-compose up -d --build
   ```
+
+
+## Upgrading to newer version of Specify7
+
+In order to run a newer version of Specify7, all you have to do copy the Specify 6 client's `specify.jar` and `config/` folder into `specify7/specify6_thick_client` and make sure the database you want to connect to has been upgraded to the new version.
+
+Then:
+
+- Pull the changes from the GitHub repository:
+
+```
+  git pull origin master
+```
+
+- Destroy the container:
+
+```
+  docker-compose down
+```
+
+- Rebuild the container:
+
+```
+  docker-compose up -d --build
+```
