@@ -37,7 +37,6 @@ subfolder.
 
 - Build the Docker image and start the container
   ```bash
-    cd specify7-docker
     docker-compose up -d
   ```
   Your Specify 7 instance should now be available at `http://localhost:<port>`.
