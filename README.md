@@ -25,7 +25,9 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
   ```
 
   Specify 7 instance should now be available at `http://localhost:8080`.
+  
   WebPortal instance should now be available at `http://localhost:80`.
+  
   Solr admin panel should now be available at `http://localhost:8983`. You can restrict access to Solr from outside the container by commenting out the `8983:8983` line in `docker-compose.yml`
 
   You can build containers without Specify7. In such case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part
