@@ -25,9 +25,9 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
   ```
 
   Specify 7 instance should now be available at `http://localhost:8080`.
-  
+
   WebPortal instance should now be available at `http://localhost:80`.
-  
+
   Solr admin panel should now be available at `http://localhost:8983`. You can restrict access to Solr from outside the container by commenting out the `8983:8983` line in `docker-compose.yml`
 
   You can build containers without Specify7. In such case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part
@@ -69,7 +69,7 @@ Then:
 
 ## Upgrade from Specify 7.3.1 to Specify 7.4.0
 
-In order to run Specify 7.4.0, all you have to do is replace the Specify 6 client 
+In order to run Specify 7.4.0, all you have to do is replace the Specify 6 client
 (`specify6_thick_client`) with Specify 6.8.00 and make sure the database you
 want to connect to has been upgraded to the new version.
 
@@ -94,8 +94,6 @@ Then:
 ```
 
 ## TODO
-
-- **[PRIORITY]** Deal with line endings error on Winodws machines
 
 - Right now, Specify7 container has Apache web server. Also, Web Portal contaienr uses nginx. Idealy, there should be a separate container for Nginx and Specify 7 with Web Portal should connect to it
 

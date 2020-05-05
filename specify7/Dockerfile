@@ -26,8 +26,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # copy the config directory for initial build, but it will be overwritten by the (optionally) mounted volume
 COPY specify7_config /usr/local/specify_config
 
-# change line endings for local_specify_settings.py
+# convert line endings
 RUN dos2unix /usr/local/specify_config/local_specify_settings.py
+RUN dos2unix /usr/local/specify_config/local_specifyweb_apache.conf
+RUN dos2unix /usr/local/specify_config/apache2-foreground
 
 # link specify7 config file from the mounted config volume
 RUN ln -sf /usr/local/specify_config/local_specify_settings.py /usr/local/specify7/specifyweb/settings/
