@@ -18,16 +18,19 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
 
 - If you want to use your own data for WebPortal, replace `webportal/export.zip` with your own export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
 
-- Build the Docker image and start the container
+- **[For Windows hosts only]** Go to Docker settings and enable access to the C drive. Then go ahead and restore Docker
+![](./docker_settings.png)
+
+- Build the Docker image and start the container. Building process can take about than 15 minutes
   ```bash
     cd specify7-docker
     docker-compose up -d
   ```
 
   Specify 7 instance should now be available at `http://localhost:8080`.
-
+  
   WebPortal instance should now be available at `http://localhost:80`.
-
+  
   Solr admin panel should now be available at `http://localhost:8983`. You can restrict access to Solr from outside the container by commenting out the `8983:8983` line in `docker-compose.yml`
 
   You can build containers without Specify7. In such case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part
@@ -69,7 +72,7 @@ Then:
 
 ## Upgrade from Specify 7.3.1 to Specify 7.4.0
 
-In order to run Specify 7.4.0, all you have to do is replace the Specify 6 client
+In order to run Specify 7.4.0, all you have to do is replace the Specify 6 client 
 (`specify6_thick_client`) with Specify 6.8.00 and make sure the database you
 want to connect to has been upgraded to the new version.
 
