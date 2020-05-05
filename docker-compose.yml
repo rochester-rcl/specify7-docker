@@ -1,12 +1,35 @@
 version: "3"
 
 services:
+
+  mariadb:
+    build: ./mariadb
+    networks:
+      - sp7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: on-failure
+    command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "-uroot"]
+
   specify7:
     build: ./specify7
     ports:
-      - "65001:80"
+      - '8080:80'
+    depends_on:
+      - mariadb
+    networks:
+      - sp7
     volumes:
       - ./specify7/specify6_thick_client:/usr/local/specify6
       - ./specify7/specify7_config:/usr/local/specify_config
-      - ~/.specify7-docker/data/specify7/specify_wb_upload:/usr/local/specify_wb_upload
-      - ~/.specify7-docker/data/specify7/specify_depository:/var/www/html/specify/specify_depository
+
+  webportal:
+    build: ./webportal
+    ports:
+      - '80:80'
+      - '8983:8983' # comment out this line of you want to restrict access to the Solr admin page
+    tty: true
+
+networks:
+  sp7:
+    driver: bridge

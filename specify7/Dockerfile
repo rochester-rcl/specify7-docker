@@ -1,39 +1,31 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="Niels Klazenga <github.com/nielsklazenga>"
+LABEL maintainer="Specify Collections Consortium <github.com/specify>"
 
 # Get Ubuntu packages
 RUN apt-get update && apt-get -y install \
-	git python-pip python-dev libmysqlclient-dev \
-	apache2 libapache2-mod-python libapache2-mod-wsgi \    
-	build-essential curl
-
-RUN apt-get install -y libssl-dev libsasl2-dev libldap2-dev
-
-# NPM needs to be installed independently from and after libssl-dev, otherwise
-# apt-get will get confused about the dependencies and fail, or remove/disable 
-# NPM
-RUN apt-get install -y nodejs npm
+	python-pip python-dev default-libmysqlclient-dev \
+	apache2 libapache2-mod-python libapache2-mod-wsgi \
+	libssl-dev libsasl2-dev libldap2-dev unzip curl \
+	build-essential curl git aptitude python-lxml \
+	mariadb-server
+RUN aptitude install -y nodejs npm libmariadbclient-dev
 
 # Get Specify 7
 ARG SPECIFY7_VERSION=7.4.0
 ENV SPECIFY7_VERSION ${SPECIFY7_VERSION}
 
 RUN cd /usr/local/ \
-	&& curl -L -o specify7.tar.gz https://github.com/specify/specify7/archive/v$SPECIFY7_VERSION.tar.gz \
-	&& tar -xvf specify7.tar.gz \
-	&& mv specify7-$SPECIFY7_VERSION specify7 \
-	&& rm -rf specify7.tar.gz
+	&& git clone https://github.com/specify/specify7/
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+
 ### INSTALL AND CONFIGURE SPECIFY 7 ###
-	
+
 # copy the config directory for initial build, but it will be overwritten by the (optionally) mounted volume
 COPY specify7_config /usr/local/specify_config
-
-# RUN ls -l /usr/local/specify_config
 
 # link specify7 config file from the mounted config volume
 RUN ln -sf /usr/local/specify_config/local_specify_settings.py /usr/local/specify7/specifyweb/settings/
@@ -44,11 +36,11 @@ RUN useradd specify \
 	&& chown -R specify.specify /home/specify \
 	&& mkdir /usr/local/specify_wb_upload \
 	&& chown -R specify:specify /usr/local/ \
-  && mkdir /var/www/html/specify \
+	&& mkdir /var/www/html/specify \
 	&& mkdir /var/www/html/specify/specify_depository \
 	&& chown -R specify:www-data /var/www/html/specify
 
-# install virtual environment	
+# install virtual environment
 RUN cd /usr/local/specify7/ \
 	&& pip install virtualenv --no-cache-dir \
 	&& virtualenv /usr/local/specify7/ve \
@@ -65,17 +57,17 @@ RUN chown -R specify:specify /usr/local/specify7 \
 	&& chown -R specify:www-data /usr/local/specify6 \
 	&& groupadd -g 999 docker \
 	&& usermod -aG docker www-data \
-	&& usermod -aG docker specify	
-	
+	&& usermod -aG docker specify
+
 # build the web application
 RUN	cd /usr/local/specify7/ && \
-	su - root -c "cd /usr/local/specify7/ && make all"
+	su - root -c "cd /usr/local/specify7/ && make build"
 
 # remove Specify 6 in order to keep the container smaller (it will be mounted via a docker volume)
 RUN rm -rf /usr/local/specify6/*
 
-	
-############################	
+
+############################
 ### APACHE CONFIGURATION ###
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP specify
@@ -87,19 +79,19 @@ ENV APACHE_RUN_DIR /var/run/apache2
 # link log files to stdout and stderr
 RUN ln -sf /dev/stdout /var/log/apache2/access.log && \
     ln -sf /dev/stderr /var/log/apache2/error.log
-	
+
 # link apache config file and service script from the mounted config volume
 RUN rm /etc/apache2/sites-enabled/000-default.conf  && \
 	ln -sf /usr/local/specify_config/local_specifyweb_apache.conf /etc/apache2/sites-enabled/ && \
 	mv /usr/local/specify_config/apache2-foreground /usr/local/bin/
-	
+
 RUN /usr/sbin/a2ensite default-ssl
 RUN /usr/sbin/a2enmod ssl
 RUN /usr/sbin/a2dismod python
 RUN /usr/sbin/a2enmod wsgi
-RUN /usr/sbin/a2enmod cgid	
+RUN /usr/sbin/a2enmod cgid
 
-RUN  chmod +x /usr/local/bin/apache2-foreground
+RUN chmod +x /usr/local/bin/apache2-foreground
 
 # avoid apache2 daemon start during boot
 RUN update-rc.d -f apache2 remove
