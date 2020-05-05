@@ -2,6 +2,9 @@
 
 Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [Web Portal 2.0](https://github.com/specify/webportal-installer).
 
+- [Installation](#Installation)
+- [Upgrade from Specify 7.3.1 to Specify 7.4.0](#upgrade-from-specify-731-to-specify-740)
+
 ## Installation
 
 - Install Docker Desktop ([macOS](https://hub.docker.com/editions/community/docker-ce-desktop-mac/), [Linux](https://docs.docker.com/engine/install/ubuntu/), [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)) and make sure it is running
@@ -61,9 +64,29 @@ Then:
 ```bash
   docker-compose down
 ```
+=======
+## Upgrade from Specify 7.3.1 to Specify 7.4.0
+
+In order to run Specify 7.4.0, all you have to do is replace the Specify 6 client 
+(`specify6_thick_client`) with Specify 6.8.00 and make sure the database you
+want to connect to has been upgraded to the new version.
+
+Then:
+
+- Pull the changes from the GitHub repository:
+
+```
+  git pull origin master
+```
+
+- Destroy the container:
+
+```
+  docker-compose down
+```
 
 - Rebuild the container:
 
-```bash
+```
   docker-compose up -d --build
 ```

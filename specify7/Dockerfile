@@ -12,6 +12,9 @@ RUN apt-get update && apt-get -y install \
 RUN aptitude install -y nodejs npm libmariadbclient-dev
 
 # Get Specify 7
+ARG SPECIFY7_VERSION=7.4.0
+ENV SPECIFY7_VERSION ${SPECIFY7_VERSION}
+
 RUN cd /usr/local/ \
 	&& git clone https://github.com/specify/specify7/
 
