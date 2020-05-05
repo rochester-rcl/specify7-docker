@@ -21,7 +21,7 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
 - **[For Windows hosts only]** Go to Docker settings and enable access to the C drive. Then go ahead and restart Docker
 ![](./docker_settings.png)
 
-- Build the Docker image and start the container. The building process can take about than 15 minutes
+- Build the Docker image and start the container. The building process can take about 15 minutes
   ```bash
     cd specify7-docker
     docker-compose up -d
