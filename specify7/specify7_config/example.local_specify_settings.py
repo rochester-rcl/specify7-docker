@@ -7,7 +7,7 @@ THICK_CLIENT_LOCATION = '/usr/local/specify6/'
 DATABASE_NAME = 'specify'
 
 # Database hostname or IP
-DATABASE_HOST = 'host.docker.internal'
+DATABASE_HOST = 'mariadb'
 DATABASE_PORT = '3306'
 
 # The master user login. Use the same values as
@@ -27,7 +27,7 @@ WEB_ATTACHMENT_KEY = None
 # The collection name to use with the web attachment server.
 WEB_ATTACHMENT_COLLECTION = None
 
-# Set to true if the asset server requires auth token to get files.
+# Set to true if the asset servwaer requires auth token to get files.
 WEB_ATTACHMENT_REQUIRES_KEY_FOR_GET = False
 
 # Report runner service
