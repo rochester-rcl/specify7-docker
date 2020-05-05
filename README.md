@@ -64,7 +64,7 @@ Then:
 ```bash
   docker-compose down
 ```
-=======
+
 ## Upgrade from Specify 7.3.1 to Specify 7.4.0
 
 In order to run Specify 7.4.0, all you have to do is replace the Specify 6 client 
