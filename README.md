@@ -9,7 +9,7 @@ Supports Specif 7.4.0 and WebPortal 2.0
 - Install Docker Desktop ([macOS](https://hub.docker.com/editions/community/docker-ce-desktop-mac/), [Linux](https://docs.docker.com/engine/install/ubuntu/), [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)) and make sure it is running
 
 - Clone this repository.
-  ```
+  ```bash
     git clone https://github.com/specify/specify7-docker.git
   ```
 
@@ -18,7 +18,7 @@ Supports Specif 7.4.0 and WebPortal 2.0
 - If you want to use your own data for WebPortal, replace `webportal/export.zip` with your own export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
 
 - Build the Docker image and start the container
-  ```
+  ```bash
     cd specify7-docker
     docker-compose up -d
   ```
@@ -33,15 +33,15 @@ Supports Specif 7.4.0 and WebPortal 2.0
   If you want to run Specify7 with a local SQL server, follow [these instructions](https://github.com/specify/specify7-docker/tree/sp7_only)
 
 - To stop the container:
-  ```
+  ```bash
     docker-compose stop
   ```
 - To destroy the container:
-  ```
+  ```bash
     docker-compose down
   ```
 - To rebuild the container (for example for a new release of Specify 6):
-  ```
+  ```bash
     docker-compose up -d --build
   ```
 
@@ -54,18 +54,18 @@ Then:
 
 - Pull the changes from the GitHub repository:
 
-```
+```bash
   git pull origin master
 ```
 
 - Destroy the container:
 
-```
+```bash
   docker-compose down
 ```
 
 - Rebuild the container:
 
-```
+```bash
   docker-compose up -d --build
 ```
