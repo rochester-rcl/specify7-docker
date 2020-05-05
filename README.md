@@ -60,21 +60,21 @@ Then:
 
 - Pull the changes from the GitHub repository:
 
-```bash
-  git pull origin master
-```
+  ```bash
+    git pull origin master
+  ```
 
 - Destroy the container:
 
-```bash
-  docker-compose down
-```
+  ```bash
+    docker-compose down
+  ```
 
 - Rebuild the container:
 
-```
-  docker-compose up -d --build
-```
+  ```
+    docker-compose up -d --build
+  ```
 
 ## TODO
 
