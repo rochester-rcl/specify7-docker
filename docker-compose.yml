@@ -6,6 +6,8 @@ services:
     build: ./mariadb
     networks:
       - sp7
+    ports:
+      - '3307:3306' # uncomment this line if you want to be able to connect to the SQL server from outside the container
     environment:
       MYSQL_ROOT_PASSWORD: root
     restart: on-failure
