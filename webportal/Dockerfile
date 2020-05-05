@@ -5,7 +5,7 @@ LABEL maintainer="Specify Collections Consortium <github.com/specify>"
 # Get Ubuntu packages
 RUN apt-get update && apt-get -y install \
 	python make unzip curl python-lxml wget \
-	git sudo default-jre nginx lsof
+	git sudo lsof default-jre nginx
 
 ENV LOCATION /home/specify/webportal-installer/
 
@@ -35,28 +35,7 @@ RUN rm /etc/nginx/sites-enabled/default && \
 COPY export.zip ${LOCATION}specify_exports/
 
 # Build the Solr app
-RUN su - root -c "cd ${LOCATION} &&  make"
+RUN su - root -c "cd ${LOCATION} && make"
 
-#Start the service
-RUN ${LOCATION}/build/bin/solr start -force
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
-
-#Load the Specify data into Solr
-#RUN cd ${LOCATION} && \
-#	#make load-data
-#	curl "http://localhost:8983/solr/export/update/csv?commit=true&encapsulator=\"&escape=\&header=true" \
-#			--data-binary @export/PortalFiles/PortalData.csv \
-#			-H 'Content-type:application/csv' ;
-
-
-#RUN mkdir ./solr-7.5.0/server/solr/export && \
-#    cp -r ./build/cores/export/core/* ./solr-7.5.0/server/solr/export && \
-#    cp ./build/cores/export/web.xml ./solr-7.5.0/server/solr-webapp/webapp/WEB-INF/web.xml 
-
-#RUN ${LOCATION}solr-7.5.0/bin/solr start -force
-
-#RUN curl 'http://localhost:8983/solr/export/update/csv?commit=true&encapsulator="&escape=\&header=true' --data-binary @/usr/local/webportal-installer/build/cores/export/PortalFiles/PortalData.csv -H 'Content-type:application/csv'
-
-#EXPOSE 8080
-
-# CMD ["/usr/local/bin/apache2-foreground", "-D", "FOREGROUND"]
+# Run Solr in foreground. Import .zip file. Run Nginx in foreground
+CMD ${LOCATION}/build/bin/solr start -force -p 8983 && curl -v "http://localhost:8983/solr/export/update/csv?commit=true&encapsulator=\"&escape=\&header=true" --data-binary @/home/specify/webportal-installer/build/cores/export/PortalFiles/PortalData.csv -H 'Content-type:application/csv' && nginx -g 'daemon off;'

@@ -8,16 +8,13 @@ services:
       - sp7
     environment:
       MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3305:3306"
     restart: on-failure
     command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "-uroot"]
 
   specify7:
     build: ./specify7
-    restart: always
     ports:
-      - "80:80"
+      - '8080:80'
     depends_on:
       - mariadb
     networks:
@@ -28,10 +25,9 @@ services:
 
   webportal:
     build: ./webportal
-    restart: always
     ports:
-     - '81:80'
-     - '8983:8983'
+      - '80:80'
+      - '8983:8983' # comment out this line of you want to restrict access to the Solr admin page
     tty: true
 
 networks:
