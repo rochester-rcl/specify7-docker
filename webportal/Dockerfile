@@ -37,5 +37,11 @@ COPY export.zip ${LOCATION}specify_exports/
 # Build the Solr app
 RUN su - root -c "cd ${LOCATION} && make"
 
-# Run Solr in foreground. Import .zip file. Run Nginx in foreground
-CMD ${LOCATION}/build/bin/solr start -force -p 8983 && curl -v "http://localhost:8983/solr/export/update/csv?commit=true&encapsulator=\"&escape=\&header=true" --data-binary @/home/specify/webportal-installer/build/cores/export/PortalFiles/PortalData.csv -H 'Content-type:application/csv' && nginx -g 'daemon off;'
+# Run Solr in foreground
+# Give Solr time to get up and running
+# Import .zip file
+# Run Nginx in foreground
+CMD ${LOCATION}/build/bin/solr start -force -p 8983 && \
+	sleep 10 && \
+	curl -v "http://localhost:8983/solr/export/update/csv?commit=true&encapsulator=\"&escape=\&header=true" --data-binary @/home/specify/webportal-installer/build/cores/export/PortalFiles/PortalData.csv -H 'Content-type:application/csv' && \
+	nginx -g 'daemon off;'
