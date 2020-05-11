@@ -21,27 +21,27 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
 
 - If you want to use your own data for WebPortal, replace `webportal/export.zip` with your export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
 
-- **[For Windows hosts only]** Follow instuctions shown on the picture below:
+- **[For Windows hosts only]** Follow instructions shown on the picture below:
   1. Press on the arrow button in your Start Menu
   1. find the docker logo and click on it
   1. Select Docker Settings in the list of options
   1. Press on `Resources` tab
-  1. Press on `File Sharing` sub menu
-  1. Select the drive where your `specify7-docker` is locate (It is drive `C` in most cases)
-  1. Press `Apply & Restart` and wait for Docker to fully reboot (as shown by the indicator in the lower left corner of the window)
+  1. Press on `File Sharing` submenu
+  1. Select the drive where your `specify7-docker` is located (It is drive `C` in most cases)
+  1. Press `Apply & Restart` and wait for Docker to fully reboot (as shown by the indicator in the lower-left corner of the window)
   ![](./src/docker_settings.png)
 
 - Building the Docker image and starting the container. The building process can take about 15 minutes
   1. Open the terminal (or Command Prompt) in the `specify7-docker` (use `cd specify7-docker` to open the directory)
   1. Run the `docker-compose up -d` command
 
-Specify 7 instance should now be available at `http://localhost:8080`.
+Specify 7 instances should now be available at `http://localhost:8080`.
   
 WebPortal instance should now be available at `http://localhost:80`.
   
 Solr admin panel should now be available at `http://localhost:8983`. You can restrict access to Solr from outside the container by commenting out the `8983:8983` line in `docker-compose.yml`
 
-You can build containers without Specify7. In such case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part
+You can build containers without Specify7. In such a case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part
   
 You can build containers without Webportal. In such case, you can comment out the `webportal` section in `docker-compose.yml`
 
