@@ -36,7 +36,7 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
   2. Run the `docker-compose up -d` command
   3. The building process can take about 15 minutes
 
-Specify 7 instances should now be available at `http://localhost:8080`. The login for the default database is `demouser` and the password also it `demouser`.
+Specify 7 instances should now be available at `http://localhost:8080`. The login for the default database is `demouser` and the password also is `demouser`.
   
 Web Portal instance should now be available at `http://localhost:80`.
   
@@ -61,6 +61,8 @@ If you want to run Specify7 with a local SQL server, follow [these instructions]
     docker-compose up -d --build
   ```
 
+## How to report problems and get support?
+If you have problems with building containers or have any questions, please send an email to [support@specifysoftware.org](mailto:support@specifysoftware.org). It would help us in solving your issues if you were to attach the output of all the commands you run in the terminal/command prompt.
 
 ## Upgrading to a newer version of Specify7
 
@@ -88,6 +90,6 @@ Then:
 
 ## TODO
 
-* Right now, Specify7 container has an Apache webserver. Also, Web Portal container uses Nginx. Ideally, there should be a separate container for Nginx and Specify 7 with Web Portal should connect to it.
+* Right now, Specify7 container has an Apache webserver. Also, Web Portal container uses Nginx. Ideally, there should be a separate container for Nginx, and Specify 7 with Web Portal should connect to it.
 
 * We can uninstall most packages from Specify7 and Web Portal after the build process is over.
