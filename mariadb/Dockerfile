@@ -9,7 +9,7 @@ COPY database.sql /docker-entrypoint-initdb.d/
 RUN apt-get update && apt-get -y install dos2unix curl
 
 # download default database from the server if database.sql is empty
-RUN [ ! -s "/docker-entrypoint-initdb.d/database.sql" ] && { curl -o /docker-entrypoint-initdb.d/database.sql http://update.specifysoftware.org/docker/database.sql; }
+RUN [ ! -s "/docker-entrypoint-initdb.d/database.sql" ] && { curl -o /docker-entrypoint-initdb.d/database.sql https://update.specifysoftware.org/docker/database.sql; }
 
 # run dos2unix on the database fie.
 RUN dos2unix -f /docker-entrypoint-initdb.d/database.sql
