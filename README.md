@@ -36,7 +36,7 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
   2. Run the `docker-compose up -d` command
   3. The building process can take about 15 minutes
 
-Specify 7 instances should now be available at `http://localhost:8080`. The login for the default database is `testuser` and the password also it `testuser`.
+Specify 7 instances should now be available at `http://localhost:8080`. The login for the default database is `demouser` and the password also it `demouser`.
   
 Web Portal instance should now be available at `http://localhost:80`.
   
