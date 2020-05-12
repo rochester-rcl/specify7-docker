@@ -36,15 +36,15 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
   2. Run the `docker-compose up -d` command
   3. The building process can take about 15 minutes
 
-Specify 7 instances should now be available at `http://localhost:8080`.
+Specify 7 instances should now be available at `http://localhost:8080`. The login for the default database is `testuser` and the password also it `testuser`.
   
 Web Portal instance should now be available at `http://localhost:80`.
   
-Solr admin panel should now be available at `http://localhost:8983`. You can restrict access to Solr from outside the container by commenting out the `8983:8983` line in `docker-compose.yml`
+Solr admin panel should now be available at `http://localhost:8983`. You can restrict access to Solr from outside the container by commenting out the `8983:8983` line in `docker-compose.yml`.
 
-You can build containers without Specify7. In such a case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part
+You can build containers without Specify7. In such a case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part.
   
-You can build containers without Web Portal. In such case, you can comment out the `webportal` section in `docker-compose.yml`
+You can build containers without Web Portal. In such case, you can comment out the `webportal` section in `docker-compose.yml`.
 
 If you want to run Specify7 with a local SQL server, follow [these instructions](https://github.com/specify/specify7-docker/tree/sp7_only)
 
@@ -88,6 +88,6 @@ Then:
 
 ## TODO
 
-* Right now, Specify7 container has an Apache webserver. Also, Web Portal container uses Nginx. Ideally, there should be a separate container for Nginx and Specify 7 with Web Portal should connect to it
+* Right now, Specify7 container has an Apache webserver. Also, Web Portal container uses Nginx. Ideally, there should be a separate container for Nginx and Specify 7 with Web Portal should connect to it.
 
-* We can uninstall most packages from Specify7 and Web Portal after the build process is over
+* We can uninstall most packages from Specify7 and Web Portal after the build process is over.
