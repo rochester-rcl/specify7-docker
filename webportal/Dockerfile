@@ -21,7 +21,7 @@ RUN cd /home/ \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-### INSTALL AND CONFIGURE WEBPORTAL ###
+### INSTALL AND CONFIGURE WEB PORTAL ###
 
 # Configure nginx to proxy the Solr requests and serve the static files by copying the provided webportal-nginx.conf to /etc/nginx/sites-available/
 RUN install -o root -g root -m644 ${LOCATION}webportal-nginx.conf /etc/nginx/sites-available/

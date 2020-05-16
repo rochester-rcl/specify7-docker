@@ -19,13 +19,13 @@ MASTER_PASSWORD = 'root'
 SCHEMA_LANGUAGE = 'en'
 
 # The Specify web attachment server URL.
-WEB_ATTACHMENT_URL = None
+WEB_ATTACHMENT_URL = 'http://localhost:8080/'
 
 # The Specify web attachment server key.
 WEB_ATTACHMENT_KEY = None
 
 # The collection name to use with the web attachment server.
-WEB_ATTACHMENT_COLLECTION = None
+WEB_ATTACHMENT_COLLECTION = 'main'
 
 # Set to true if the asset server requires auth token to get files.
 WEB_ATTACHMENT_REQUIRES_KEY_FOR_GET = False
