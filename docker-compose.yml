@@ -6,8 +6,10 @@ services:
     build: ./mariadb
     networks:
       - sp7
-    ports:
-      - '3307:3306' # uncomment this line if you want to be able to connect to the SQL server from outside the container
+    expose: # remove these two lines and uncomment the next two lines if you want to be able to connect to the MariaDB server from outside the container
+      - '3306'
+    #ports:
+    #  - '3307:3306'
     environment:
       MYSQL_ROOT_PASSWORD: root
     restart: on-failure
@@ -29,7 +31,7 @@ services:
     build: ./webportal
     ports:
       - '80:80'
-      - '8983:8983' # comment out this line of you want to restrict access to the Solr admin page
+      - '8983:8983' # comment out this line if you want to restrict access to the Solr admin page
     tty: true
 
 networks:

@@ -7,7 +7,8 @@ RUN apt-get update && apt-get -y install \
 	python-pip python-dev default-libmysqlclient-dev \
 	apache2 libapache2-mod-python libapache2-mod-wsgi \
 	libssl-dev libsasl2-dev libldap2-dev unzip curl \
-	build-essential curl git aptitude python-lxml dos2unix
+	build-essential curl git aptitude python-lxml dos2unix \
+	imagemagick ghostscript authbind sudo #bottlepy
 RUN aptitude install -y nodejs npm libmariadbclient-dev
 
 # Get Specify 7
@@ -97,15 +98,37 @@ RUN /usr/sbin/a2enmod cgid
 
 RUN chmod +x /usr/local/bin/apache2-foreground
 
-# avoid apache2 daemon start during boot
-RUN update-rc.d -f apache2 remove
-
 VOLUME [ "/usr/local/specify6" ]
 VOLUME [ "/usr/local/specify_config" ]
-VOLUME [ "/usr/local/specify_wb_upload" ]
-VOLUME [ "/var/www/html/specify/specify_depository" ]
 
-EXPOSE 80
-EXPOSE 443
 
-CMD ["/usr/local/bin/apache2-foreground", "-D", "FOREGROUND"]
+### WEB ASSET SERVER ###
+
+ENV LOCATION /usr/local/web-asset-server/
+
+# Clone repository
+RUN cd /usr/local/ \
+	&& git clone https://github.com/specify/web-asset-server/
+
+# Get ExifRead, Paste and sh
+RUN cd ${LOCATION} && pip install -r requirements.txt
+
+# Clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Configuration and Deployment
+
+# disable security since container is going to be isolated
+RUN cd ${LOCATION} && sed -i "s/'test_attachment_key'/None/" settings.py
+
+# set default server to 'paste'
+RUN cd ${LOCATION} && sed -i "s/wsgiref/paste/" settings.py
+
+# allow access to port 8080
+RUN touch /etc/authbind/byport/8080 && \
+	chmod 500 /etc/authbind/byport/8080
+
+#http://localhost:8080/web_asset_store.xml
+
+CMD /etc/init.d/apache2 start && \
+	python ${LOCATION}server.py

@@ -21,7 +21,7 @@ RUN cd /home/ \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-### INSTALL AND CONFIGURE WEBPORTAL ###
+### INSTALL AND CONFIGURE WEB PORTAL ###
 
 # Configure nginx to proxy the Solr requests and serve the static files by copying the provided webportal-nginx.conf to /etc/nginx/sites-available/
 RUN install -o root -g root -m644 ${LOCATION}webportal-nginx.conf /etc/nginx/sites-available/
@@ -35,13 +35,13 @@ RUN rm /etc/nginx/sites-enabled/default && \
 COPY export.zip ${LOCATION}specify_exports/
 
 # Build the Solr app
-RUN su - root -c "cd ${LOCATION} && make"
+RUN su - root -c "cd ${LOCATION} && make clean-all && make build-all"
 
 # Run Solr in foreground
 # Give Solr time to get up and running
 # Import .zip file
 # Run Nginx in foreground
-CMD ${LOCATION}/build/bin/solr start -force -p 8983 && \
+CMD ${LOCATION}build/bin/solr start -force -p 8983 && \
 	sleep 10 && \
-	curl -v "http://localhost:8983/solr/export/update/csv?commit=true&encapsulator=\"&escape=\&header=true" --data-binary @/home/specify/webportal-installer/build/cores/export/PortalFiles/PortalData.csv -H 'Content-type:application/csv' && \
+	curl -v "http://localhost:8983/solr/export/update/csv?commit=true&encapsulator=\"&escape=\&header=true" --data-binary @${LOCATION}build/col/export/PortalFiles/PortalData.csv -H 'Content-type:application/csv' && \
 	nginx -g 'daemon off;'
