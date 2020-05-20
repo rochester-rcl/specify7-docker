@@ -98,20 +98,13 @@ RUN /usr/sbin/a2enmod cgid
 
 RUN chmod +x /usr/local/bin/apache2-foreground
 
-# avoid apache2 daemon start during boot
-RUN update-rc.d -f apache2 remove
-
 VOLUME [ "/usr/local/specify6" ]
 VOLUME [ "/usr/local/specify_config" ]
-VOLUME [ "/usr/local/specify_wb_upload" ]
-VOLUME [ "/var/www/html/specify/specify_depository" ]
 
-EXPOSE 80
-EXPOSE 443
 
 ### WEB ASSET SERVER ###
 
-ARG LOCATION=/usr/local/web-asset-server/
+ENV LOCATION /usr/local/web-asset-server/
 
 # Clone repository
 RUN cd /usr/local/ \
@@ -132,14 +125,10 @@ RUN cd ${LOCATION} && sed -i "s/'test_attachment_key'/None/" settings.py
 RUN cd ${LOCATION} && sed -i "s/wsgiref/paste/" settings.py
 
 # allow access to port 8080
-RUN touch 8080 & \
-	chmod u+x 8080 & \
-	sudo mv 8080 /etc/authbind/byport
-
-# Run the server
-RUN cd ${LOCATION} && nohup python server.py &
+RUN touch /etc/authbind/byport/8080 && \
+	chmod 500 /etc/authbind/byport/8080
 
 #http://localhost:8080/web_asset_store.xml
 
-
-CMD ["/usr/local/bin/apache2-foreground", "-D", "FOREGROUND"]
+CMD /etc/init.d/apache2 start && \
+	python ${LOCATION}server.py
