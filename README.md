@@ -2,9 +2,6 @@
 
 Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [Web Portal 2.0](https://github.com/specify/webportal-installer).
 
-* [Installation](#Installation)
-* [Upgrade from Specify 7.3.1 to Specify 7.4.0](#upgrade-from-specify-731-to-specify-740)
-
 ## Installation
 
 * Install Docker Desktop ([macOS](https://hub.docker.com/editions/community/docker-ce-desktop-mac/), [Linux](https://docs.docker.com/engine/install/ubuntu/), [Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)) and make sure it is running
@@ -23,27 +20,25 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
 
 * **[For Windows hosts only]** Follow these instructions in order to avoid getting Drive-related error messages:
   1. Press on the arrow-shaped button in your Start Menu
-  2. find the docker logo and click on it
+  2. Find the docker logo and click on it
   3. Select `Settings` in the list of options
   4. Press on the `Resources` tab
   5. Press on the `File Sharing` submenu
-  6. Select the drive where your `specify7-docker` is located (It is drive `C` in most cases)
+  6. Select the drive where your `specify7-docker` folder is located (It is drive `C` in most cases)
   7. Press `Apply & Restart` and wait for Docker to fully reboot (as shown by the indicator in the lower-left corner of the window)
   ![Instructions are shown above](./src/docker_settings.png "Follow these instructions in order to avoid getting Drive-related error messages")
 
 * Build the Docker image and start the container:
-  1. Open the terminal (or Command Prompt) in the `specify7-docker` (use `cd specify7-docker` to open the directory)
+  1. Open the terminal (or Command Prompt) in the `specify7-docker` folder (use `cd specify7-docker` to open the directory)
   2. Run the `docker-compose up -d` command
   3. The building process can take about 15 minutes
 
-Specify 7 instances should now be available at `http://localhost:8080`. The login for the default database is `demouser` and the password also is `demouser`.
-  
-Web Portal instance should now be available at `http://localhost:80`.
-  
-Solr admin panel should now be available at `http://localhost:8983`. You can restrict access to Solr from outside the container by commenting out the `8983:8983` line in `docker-compose.yml`.
+Specify 7 instance should now be available at `http://localhost:8080`. The login for the default database is `demouser` and the password is also `demouser`.
+
+Web Portal instance should be available at `http://localhost:80`.
 
 You can build containers without Specify7. In such a case, you can comment out respected sections for `mariadb` and `specify7` in `docker-compose.yml` as well as the `networks` part.
-  
+
 You can build containers without Web Portal. In such case, you can comment out the `webportal` section in `docker-compose.yml`.
 
 If you want to run Specify7 with a local SQL server, follow [these instructions](https://github.com/specify/specify7-docker/tree/sp7_only)
@@ -66,7 +61,7 @@ If you have problems with building containers or have any questions, please send
 
 ## Upgrading to a newer version of Specify7
 
-To run a newer version of Specify7, all you have to do copy the Specify 6 client's `specify.jar` and `config/` folder into `specify7/specify6_thick_client` and make sure the database you want to connect to has been upgraded to the new version.
+To run a newer version of Specify7, all you have to do is copy the new Specify 6 client's `specify.jar` and `config/` folder into `specify7/specify6_thick_client` and make sure the database you want to connect to has been upgraded to the new version of Specify.
 
 Then:
 
@@ -74,12 +69,6 @@ Then:
 
   ```bash
     git pull origin master
-  ```
-
-* Destroy the container:
-
-  ```bash
-    docker-compose down
   ```
 
 * Rebuild the container:
@@ -90,6 +79,6 @@ Then:
 
 ## TODO
 
-* Right now, Specify7 container has an Apache webserver. Also, Web Portal container uses Nginx. Ideally, there should be a separate container for Nginx, and Specify 7 with Web Portal should connect to it.
+* Right now, Specify7 container has an Apache webserver, Web Portal container uses Nginx, and Web Asset Server is running Bottle. Ideally, there should be a separate container for Nginx, and Specify 7, Web Asset Server, and Web Portal should connect to it.
 
-* We can uninstall most packages from Specify7 and Web Portal after the build process is over.
+* We can uninstall most packages from Specify7 and Web Portal after the build process is over in order to reduce container size.
