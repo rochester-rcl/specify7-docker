@@ -19,10 +19,10 @@ MASTER_PASSWORD = 'root'
 SCHEMA_LANGUAGE = 'en'
 
 # The Specify web attachment server URL.
-WEB_ATTACHMENT_URL = 'http://localhost:8080/'
+WEB_ATTACHMENT_URL = 'http://localhost:8081/web_asset_store.xml'
 
 # The Specify web attachment server key.
-WEB_ATTACHMENT_KEY = None
+WEB_ATTACHMENT_KEY = ''
 
 # The collection name to use with the web attachment server.
 WEB_ATTACHMENT_COLLECTION = 'main'
