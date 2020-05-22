@@ -1,9 +1,12 @@
-version: "3"
+version: "3.4"
 
 services:
 
   mariadb:
-    build: ./mariadb
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: mariadb
     networks:
       - sp7
     expose: # remove these two lines and uncomment the next two lines if you want to be able to connect to the MariaDB server from outside the container
@@ -13,10 +16,12 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     restart: on-failure
-    command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "-uroot"]
 
   specify7:
-    build: ./specify7
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: specify7
     ports:
       - '8080:80'   # specify7
       - '8081:8081' # web asset server
@@ -25,11 +30,14 @@ services:
     networks:
       - sp7
     volumes:
-      - ./specify7/specify6_thick_client:/usr/local/specify6
-      - ./specify7/specify7_config:/usr/local/specify_config
+      - ./specify6_thick_client:/usr/local/specify6
+      - ./specify7_config:/usr/local/specify_config
 
   webportal:
-    build: ./webportal
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: webportal
     ports:
       - '80:80'
       - '8983:8983' # comment out this line if you want to restrict access to the Solr admin page

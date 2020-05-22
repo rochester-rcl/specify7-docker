@@ -8,15 +8,15 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
 
 * Download this repository:
   1. You can either press the button at the top right corner of this page and then press `Download ZIP`, unzip the downloaded file and place it into a convenient location
-  ![](./src/download_link.png)
+  ![](https://update.specifysoftware.org/docker/src/download_link.png)
   2. OR install **Git**, open terminal, navigate to a convenient location and run the following command
   ```bash
     git clone https://github.com/specify/specify7-docker.git
   ```
 
-* If you want to use your own database with specify7, replace `mariadb/database.sql` with an export of your database. Be sure to name it `database.sql`
+* If you want to use your own database with specify7, replace `data/database.sql` with an export of your database. Be sure to name it `database.sql`. Instructions on how to create a backup of your database can be found [here](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Command-Line-Data-Export-Program.pdf)
 
-* If you want to use your own data for Web Portal, replace `webportal/export.zip` with your export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
+* If you want to use your own data for Web Portal, replace `data/export.zip` with your export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
 
 * **[For Windows hosts only]** Follow these instructions in order to avoid getting Drive-related error messages:
   1. Press on the arrow-shaped button in your Start Menu
@@ -26,7 +26,7 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
   5. Press on the `File Sharing` submenu
   6. Select the drive where your `specify7-docker` folder is located (It is drive `C` in most cases)
   7. Press `Apply & Restart` and wait for Docker to fully reboot (as shown by the indicator in the lower-left corner of the window)
-  ![Instructions are shown above](./src/docker_settings.png "Follow these instructions in order to avoid getting Drive-related error messages")
+  ![Instructions are shown above](https://update.specifysoftware.org/docker/src/docker_settings.png "Follow these instructions in order to avoid getting Drive-related error messages")
 
 * Build the Docker image and start the container:
   1. Open the terminal (or Command Prompt) in the `specify7-docker` folder (use `cd specify7-docker` to open the directory)
@@ -61,7 +61,7 @@ If you have problems with building containers or have any questions, please send
 
 ## Upgrading to a newer version of Specify7
 
-To run a newer version of Specify7, all you have to do is copy the new Specify 6 client's `specify.jar` and `config/` folder into `specify7/specify6_thick_client` and make sure the database you want to connect to has been upgraded to the new version of Specify.
+To run a newer version of Specify7, all you have to do is copy the new Specify 6 client's `specify.jar` and `config/` folder into `specify6_thick_client` and make sure the database you want to connect to has been upgraded to the new version of Specify.
 
 Then:
 
