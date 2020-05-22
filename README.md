@@ -14,7 +14,7 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
     git clone https://github.com/specify/specify7-docker.git
   ```
 
-* If you want to use your own database with specify7, replace `data/database.sql` with an export of your database. Be sure to name it `database.sql`. Instructions on how to create a backup of your database can be found [here](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Command-Line-Data-Export-Program.pdf)
+* If you want to use your own database with specify7, replace `data/database.sql` with an export of your database. Be sure to name it `database.sql`. Instructions on how to create a backup of your database can be found [here](https://update.specifysoftware.org/docker/src/Backup_Specify_Database.pdf)
 
 * If you want to use your own data for Web Portal, replace `data/export.zip` with your export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
 
@@ -76,6 +76,10 @@ Then:
   ```
     docker-compose up -d --build
   ```
+
+## Troubleshooting
+
+* If you get the following error: `ERROR: Service 'mariadb' failed to build: Get https://registry-1.docker.io/v2/library/mariadb/manifests/latest: unauthorized: incorrect username or password`, run `docker logout` in the command line
 
 ## TODO
 
