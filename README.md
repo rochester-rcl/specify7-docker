@@ -85,4 +85,4 @@ Then:
 
 * Right now, Specify7 container has an Apache webserver, Web Portal container uses Nginx, and Web Asset Server is running Bottle. Ideally, there should be a separate container for Nginx, and Specify 7, Web Asset Server, and Web Portal should connect to it.
 
-* We can uninstall most packages from Specify7 and Web Portal after the build process is over in order to reduce container size.
+* We can uninstall most packages from Specify7 and Web Portal after the build process is over in order to reduce container size[![analytics](http://www.google-analytics.com/collect?v=1&t=pageview&dl=https%3A%2F%2Fgithub.com%2Fspecify%2Fsp7-stats&uid=readme&tid=UA-169822764-6)]()
