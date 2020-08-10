@@ -61,12 +61,12 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ### SPECIFY 7 ###
 
-# Get Specify 7
-RUN cd /usr/local/ \
-	&& git clone https://github.com/specify/specify7/
-
 # copy the config directory for initial build, but it will be overwritten by the (optionally) mounted volume
 COPY specify7_config /usr/local/specify_config
+
+# Get Specify 7
+RUN cd /usr/local/ \
+	&& git clone https://github.com/specify/specify7/ #\
 
 # convert line endings
 RUN dos2unix /usr/local/specify_config/local_specify_settings.py

@@ -59,6 +59,20 @@ If you want to run Specify7 with a local SQL server, follow [these instructions]
 ## How to report problems and get support?
 If you have problems with building containers or have any questions, please send an email to [support@specifysoftware.org](mailto:support@specifysoftware.org). It would help us in solving your issues if you were to attach the output of all the commands you run in the terminal/command prompt.
 
+Open your terminal/command line and execute the following command to enable debugging:
+```bash
+container_name=specify7-docker_specify7_1
+docker exec -it ${container_name} cp /usr/local/specify_config/enable_debug.py /usr/local/specify7/specifyweb/settings/debug.py
+docker restart ${container_name}
+```
+And this one to disable debugging:
+```bash
+container_name=specify7-docker_specify7_1
+docker exec -it ${container_name} cp /usr/local/specify_config/disable_debug.py /usr/local/specify7/specifyweb/settings/debug.py
+docker restart ${container_name}
+```
+Replace `specify7-docker_specify7_1` with the name of your specify7 container. You can see it in Docker Dashboard.
+
 ## Upgrading to a newer version of Specify7
 
 To run a newer version of Specify7, all you have to do is copy the new Specify 6 client's `specify.jar` and `config/` folder into `specify6_thick_client` and make sure the database you want to connect to has been upgraded to the new version of Specify.
@@ -73,13 +87,13 @@ Then:
 
 * Rebuild the container:
 
-  ```
+  ```bash
     docker-compose up -d --build
   ```
 
 ## Troubleshooting
 
-* If you get the following error: `ERROR: Service 'mariadb' failed to build: Get https://registry-1.docker.io/v2/library/mariadb/manifests/latest: unauthorized: incorrect username or password`, run `docker logout` in the command line
+* If you get the following error: `ERROR: Service 'mariadb' failed to build: Get https://registry-1.docker.io/v2/library/mariadb/manifests/latest: unauthorized: incorrect username or password`, run `docker logout` in the command line.
 
 ## TODO
 
