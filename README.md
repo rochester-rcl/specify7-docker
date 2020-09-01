@@ -1,6 +1,6 @@
 # Specify 7 and Web Portal in Docker
 
-Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [Web Portal 2.0](https://github.com/specify/webportal-installer).
+Dockerized version of [Specify 7.5.0](https://github.com/specify/specify7) and [Web Portal 2.0](https://github.com/specify/webportal-installer).
 
 ## Installation
 
