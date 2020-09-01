@@ -16,7 +16,7 @@ Dockerized version of [Specify 7.4.0](https://github.com/specify/specify7) and [
 
 * If you want to use your own database with specify7, replace `data/database.sql` with an export of your database. Be sure to name it `database.sql`. Instructions on how to create a backup of your database can be found [here](https://update.specifysoftware.org/docker/src/Backup_Specify_Database.pdf)
 
-* If you want to use your own data for Web Portal, replace `data/export.zip` with your export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.sustain.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
+* If you want to use your own data for Web Portal, replace `data/export.zip` with your export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf))
 
 * **[For Windows hosts only]** Follow these instructions in order to avoid getting Drive-related error messages:
   1. Press on the arrow-shaped button in your Start Menu

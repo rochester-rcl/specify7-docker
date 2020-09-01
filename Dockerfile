@@ -71,7 +71,6 @@ COPY specify7_config /usr/local/specify_config
 RUN cd /usr/local/ \
 	&& git clone https://github.com/specify/specify7/
 WORKDIR /usr/local/specify7
-RUN git checkout workbench-upload
 
 # convert line endings
 RUN dos2unix /usr/local/specify_config/local_specify_settings.py
