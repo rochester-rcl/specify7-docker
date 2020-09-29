@@ -30,7 +30,7 @@ Dockerized version of [Specify 7.5.0](https://github.com/specify/specify7) and [
 
 * Build the Docker image and start the container:
   1. Open the terminal (or Command Prompt) in the `specify7-docker` folder (use `cd specify7-docker` to open the directory)
-  2. Run the `docker-compose up -d` command
+  2. Run the `docker-compose up -d` command (you may need to run this command as a root user depending on the system)
   3. The building process can take about 15 minutes
 
 Specify 7 instance should now be available at `http://localhost:8080`. The login for the default database is `demouser` and the password is also `demouser`.
@@ -59,17 +59,15 @@ If you want to run Specify7 with a local SQL server, follow [these instructions]
 ## How to report problems and get support?
 If you have problems with building containers or have any questions, please send an email to [support@specifysoftware.org](mailto:support@specifysoftware.org). It would help us in solving your issues if you were to attach the output of all the commands you run in the terminal/command prompt.
 
-Open your terminal/command line and execute the following command to enable debugging:
+Open your terminal/command line and execute the following command to enable debugging (you may have to run them as root user):
 ```bash
-container_name=specify7-docker_specify7_1
-docker exec -it ${container_name} cp /usr/local/specify_config/enable_debug.py /usr/local/specify7/specifyweb/settings/debug.py
-docker restart ${container_name}
+docker exec -it specify7-docker_specify7_1 cp /usr/local/specify_config/enable_debug.py /usr/local/specify7/specifyweb/settings/debug.py
+docker restart specify7-docker_specify7_1
 ```
 And this one to disable debugging:
 ```bash
-container_name=specify7-docker_specify7_1
-docker exec -it ${container_name} cp /usr/local/specify_config/disable_debug.py /usr/local/specify7/specifyweb/settings/debug.py
-docker restart ${container_name}
+docker exec -it specify7-docker_specify7_1 cp /usr/local/specify_config/disable_debug.py /usr/local/specify7/specifyweb/settings/debug.py
+docker restart $specify7-docker_specify7_1
 ```
 Replace `specify7-docker_specify7_1` with the name of your specify7 container. You can see it in Docker Dashboard.
 
