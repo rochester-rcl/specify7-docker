@@ -34,15 +34,15 @@ services:
       - ./specify6_thick_client:/usr/local/specify6
       - ./specify7_config:/usr/local/specify_config
 
-  webportal:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-      target: webportal
-    ports:
-      - '80:80'
-      - '8983:8983' # comment out this line if you want to restrict access to the Solr admin page
-    tty: true
+  # webportal:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #     target: webportal
+  #   ports:
+  #     - '80:80'
+  #     - '8983:8983' # comment out this line if you want to restrict access to the Solr admin page
+  #   tty: true
 
 networks:
   sp7:
