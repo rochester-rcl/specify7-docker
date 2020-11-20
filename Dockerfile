@@ -69,7 +69,9 @@ COPY specify7_config /usr/local/specify_config
 
 # Get Specify 7
 RUN cd /usr/local/ \
-	&& git clone https://github.com/specify/specify7/
+	&& git clone https://github.com/specify/specify7/ \
+	&& cd specify7 \
+	&& git checkout workbench-upload
 WORKDIR /usr/local/specify7
 
 # convert line endings
@@ -81,7 +83,8 @@ RUN ln -sf /usr/local/specify_config/local_specify_settings.py ./specifyweb/sett
 
 # install virtual environment
 RUN python3.6 -m venv ve \
-	&& ve/bin/pip install --no-cache-dir -r requirements.txt
+	&& ve/bin/pip install --no-cache-dir -r requirements.txt \
+	&& ve/bin/pip install celery
 
 # copy specify6 installation
 COPY specify6_thick_client /usr/local/specify6
@@ -124,12 +127,14 @@ VOLUME [ "/usr/local/specify_config" ]
 
 # Clone repository
 RUN cd /usr/local/ \
-	&& git clone https://github.com/specify/web-asset-server/
+	&& git clone https://github.com/specify/web-asset-server/ \
+	&& cd web-asset-server \
+	&& git checkout development
 
 WORKDIR /usr/local/web-asset-server/
 
 # Get ExifRead, Paste and sh
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 # disable security since container is going to be isolated
 RUN sed -i "s/'test_attachment_key'/None/" settings.py
@@ -140,12 +145,18 @@ RUN sed -i "s/wsgiref/paste/" settings.py
 # change port to 8081
 RUN sed -i "s/8080/8081/" settings.py
 
-# create a direcory for attachments # TODO: test if this is needed <<<<<<<<<<<<<<<<<
+# allow ImageMagick to create thumbnails for PDF files
+RUN sed -i "s/<policy domain=\"coder\" rights=\"none\" pattern=\"PDF\" \/>/<policy domain=\"coder\" rights=\"read|write\" pattern=\"PDF\" \/><policy domain=\"coder\" rights=\"read|write\" pattern=\"LABEL\" \/>/" /etc/ImageMagick-6/policy.xml
+
+
+
+# create a direcory for attachments
 RUN mkdir -p /home/specify/attachments/
 
 
-CMD /etc/init.d/apache2 start \
-	&& python server.py
+CMD /etc/init.d/apache2 start -DFOREGROUND \
+	&& python3 server.py
+#CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
 
 
 
