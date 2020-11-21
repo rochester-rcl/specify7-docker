@@ -19,8 +19,7 @@ MASTER_PASSWORD = 'root'
 SCHEMA_LANGUAGE = 'en'
 
 # The Specify web attachment server URL.
-#WEB_ATTACHMENT_URL = 'http://localhost:8081/web_asset_store.xml'
-WEB_ATTACHMENT_URL = 'http://host.docker.internal:8081/web_asset_store.xml'
+WEB_ATTACHMENT_URL = 'http://localhost:8081/web_asset_store.xml'
 
 # The Specify web attachment server key.
 WEB_ATTACHMENT_KEY = ''
