@@ -112,6 +112,7 @@ RUN rm /etc/apache2/sites-enabled/000-default.conf \
 
 RUN /usr/sbin/a2ensite default-ssl
 RUN /usr/sbin/a2enmod ssl
+RUN /usr/sbin/a2enmod headers
 RUN /usr/sbin/a2dismod python
 RUN /usr/sbin/a2enmod wsgi
 RUN /usr/sbin/a2enmod cgid
