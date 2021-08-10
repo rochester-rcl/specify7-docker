@@ -4,9 +4,10 @@ services:
 
   mariadb:
     build:
-      context: ./
+      context: ./docker-build
       dockerfile: Dockerfile
       target: mariadb
+    container_name: mariadb
     networks:
       - sp7
     expose: # remove these two lines and uncomment the next two lines if you want to be able to connect to the MariaDB server from outside the container
@@ -16,12 +17,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     restart: on-failure
+    volumes:
+      - ./docker-build/init-db:/docker-entrypoint-initdb.d/
+      - ./data:/var/lib/mysql
 
   specify7:
     build:
-      context: ./
+      context: ./docker-build
       dockerfile: Dockerfile
       target: specify7
+    container_name: specify7
     ports:
       - '8080:80'   # specify7
       - '8081:8081' # web asset server
@@ -31,8 +36,8 @@ services:
       - sp7
     restart: always
     volumes:
-      - ./specify6_thick_client:/usr/local/specify6
-      - ./specify7_config:/usr/local/specify_config
+      - ./docker-build/specify6_thick_client:/usr/local/specify6
+      - ./docker-build/specify7_config:/usr/local/specify_config
 
   # webportal:
   #   build:

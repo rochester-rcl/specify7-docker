@@ -40,7 +40,11 @@ under GNU General Public License 2 (GPL2).
     git clone https://github.com/specify/specify7-docker.git
   ```
 
-* If you want to use your own database with specify7, replace `data/database.sql` with an export of your database. Be sure to name it `database.sql`. Instructions on how to create a backup of your database can be found [here](https://update.specifysoftware.org/docker/src/Backup_Specify_Database.pdf).
+* If you want to use your own database with specify7, export your database following the instructions [here](https://update.specifysoftware.org/docker/src/Backup_Specify_Database.pdf). To import the database, start the `mariadb` service: `docker-compose up mariadb` and import the exported .sql file with the following command:
+
+```bash
+docker exec -i mariadb sh -c 'exec mysql -D specify -uroot -p"$MYSQL_ROOT_PASSWORD"' < path/to/database/database.sql
+```
 
 * If you want to use your own data for Web Portal, replace `data/export.zip` with your export file. Be sure to name it `export.zip`. You can use the Specify Data Export tool to create a Web Portal export zip file ([see the Specify 6 Data Export documentation](https://www.specifysoftware.org/wp-content/uploads/2017/03/Using-the-Specify-Web-Portal.pdf)).
 
