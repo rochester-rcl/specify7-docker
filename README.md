@@ -40,7 +40,7 @@ under GNU General Public License 2 (GPL2).
     git clone https://github.com/specify/specify7-docker.git
   ```
 
-* If you want to use your own database with specify7, export your database following the instructions [here](https://update.specifysoftware.org/docker/src/Backup_Specify_Database.pdf). To import the database, start the `mariadb` service: `docker-compose up mariadb` and import the exported .sql file with the following command:
+* **NOTE**: This fork requires you to manually import your Specify database. It *does not* include a demo database. Before starting the service for the first time, copy the *example.env* file to *.env* and set the SPECIFY_DATA_DIR variable to an absolute path on your local system. To import your database, first export it following the instructions [here](https://update.specifysoftware.org/docker/src/Backup_Specify_Database.pdf). To import the database, start the `mariadb` service: `docker-compose up mariadb` and import the exported .sql file with the following command:
 
 ```bash
 docker exec -i mariadb sh -c 'exec mysql -D specify -uroot -p"$MYSQL_ROOT_PASSWORD"' < path/to/database/database.sql

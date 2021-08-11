@@ -19,7 +19,7 @@ services:
     restart: on-failure
     volumes:
       - ./docker-build/init-db:/docker-entrypoint-initdb.d/
-      - ./data:/var/lib/mysql
+      - ${SPECIFY_DATA_DIR}:/var/lib/mysql
 
   specify7:
     build:
